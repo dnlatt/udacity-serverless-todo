@@ -16,7 +16,7 @@ export const handler = middy(
     const userId = event.requestContext.authorizer.principalId
 
     try {
-      const response = await getTodos(userId)
+      const items = await getTodos(userId)
       return {
         statusCode: CREATED_STATUS_CODE,
         headers: {
@@ -24,9 +24,7 @@ export const handler = middy(
           'Access-Control-Allow-Credentials': true
         },
         body: JSON.stringify({
-          item: {
-            response
-          }
+          items
         })
       }
     } catch(e) {
